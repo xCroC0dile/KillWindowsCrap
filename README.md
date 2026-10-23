@@ -31,7 +31,7 @@ Even when total throughput is only 5–8 MB/s, the unbuffered 4KB random reads/w
 
 ## Usage
 
-1. Download [`KillWindowsCrap.bat`](KillWindowsCrap.bat).
+1. Download `KillWindowsCrap.bat`.
 2. Right-click the file and select **Run as administrator** (or run it from an elevated Command Prompt: `C:\Windows\system32>`).
 3. Wait for the terminal to print `[DONE]`.
 4. Restart the computer to clear remaining staged memory handles.
@@ -42,5 +42,15 @@ Even when total throughput is only 5–8 MB/s, the unbuffered 4KB random reads/w
 
 To verify that the update service is completely locked out, run this command in an elevated prompt:
 
-```cmd
-sc query wuauserv && sc qc wuauserv
+    sc query wuauserv && sc qc wuauserv
+
+**Expected output:**
+* `STATE`: `1  STOPPED`
+* `START_TYPE`: `4  DISABLED`
+* `SERVICE_START_NAME`: `NT AUTHORITY\NetworkService`
+
+---
+
+## Disclaimer
+
+This script forcefully disables Windows Update and automated servicing. It is intended for older hardware, secondary machines, or offline workstations where standard Windows background activity causes system-breaking disk throttling. Use at your own discretion.
